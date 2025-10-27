@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Animación</title>
+  <style>
+    
+    :root {
+      --background: linear-gradient(135deg, #1a0033, #4b0082);
+      --dark: #c9a0ff;
+      --glow: rgba(200, 160, 255, 0.6);
+      --morado: #a86eff;
+      --rosa: #ffb6e6;
+    }
+
+    
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--background);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    
+    body::before {
+      content: "";
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 20% 20%, var(--morado) 0%, transparent 30%),
+                  radial-gradient(circle at 80% 80%, var(--rosa) 0%, transparent 30%);
+      animation: moveGlow 15s linear infinite alternate;
+      z-index: 0;
+    }
+
+    @keyframes moveGlow {
+      0% { transform: translate(0, 0); opacity: 0.8; }
+      100% { transform: translate(-10%, -10%); opacity: 0.6; }
+    }
+
+    
+    .contenedor {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    
+    .box-liquid {
+      position: relative;
+      background: rgba(255, 255, 255, 0.1);
+      border: 0.25rem solid var(--dark);
+      box-shadow: 0 0 25px var(--glow);
+      width: 22rem;
+      height: 32rem;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+    }
+
+    
+    .box-liquid::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("bts.gif") center/cover no-repeat;
+      filter: brightness(0.9) contrast(1.1);
+      opacity: 0.95;
+      z-index: 1;
+    }
+
+    
+    .box-liquid::after {
+      content: "";
+      position: absolute;
+      background: radial-gradient(circle, rgba(168,110,255,0.3) 0%, rgba(75,0,130,0.1) 70%);
+      height: 200%;
+      width: 200%;
+      bottom: -50%;
+      left: -50%;
+      border-radius: 40%;
+      animation: spin 10s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-100%) rotate(-500deg);
+      }
+    }
+
+    
+    .titulo {
+      position: absolute;
+      bottom: 1rem;
+      width: 100%;
+      text-align: center;
+      font-size: 1.8rem;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px var(--morado), 0 0 20px var(--rosa);
+      z-index: 2;
+      animation: glowText 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowText {
+      from { text-shadow: 0 0 10px var(--morado), 0 0 20px var(--rosa); }
+      to { text-shadow: 0 0 25px var(--rosa), 0 0 45px var(--morado); }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="contenedor">
+    <div class="box-liquid"></div>
+    <div class="titulo">BTS</div>
+  </div>
+</body>
+</html>
